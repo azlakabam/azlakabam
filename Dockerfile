@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y unzip
 
 COPY . .
 
-RUN deno task build-gameserver
+RUN deno task build-gameserver --target linux
 
 FROM debian:12-slim
 
