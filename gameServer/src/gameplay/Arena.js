@@ -10,7 +10,6 @@ import { clampRect, compressTiles, createArenaTiles, deserializeRect, fillRect }
 /**
  * @typedef WorkerArenaHandlers
  * @property {(areas: FilledAreaMessageData[]) => void} notifyAreasFilled
- * @property {(id: number) => void} fill_spawn_finished
  */
 
 /** @typedef {(rect: import("../util/util.js").Rect, tileValue: number) => void} OnRectFilledCallback */
@@ -107,14 +106,6 @@ export class Arena {
 	 */
 	fillPlayerSpawn(pos, playerId) {
 		return this.#messenger.send.fillPlayerSpawn(pos.x, pos.y, playerId);
-	}
-
-	/**
-	 * Stop the animation
-	 * @param {number} id
-	 */
-	stopAnimation(id) {
-		return this.#messenger.send.stopAnimation(id);
 	}
 
 	/**

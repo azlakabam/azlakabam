@@ -68,16 +68,6 @@ const arenaWorkerHandlers = {
 	},
 
 	/**
-	 * Stop an animation.
-	 * @param {number} id the id of the animation to stop
-	 */
-	stopAnimation(id) {
-		console.log("Stopping", id);
-		running.get(id)?.stop(messenger);
-		running.delete(id);
-	},
-
-	/**
 	 * Fills the tiles that are covered with a player trail.
 	 * @param {[x: number, y: number][]} vertices
 	 * @param {number} playerId
