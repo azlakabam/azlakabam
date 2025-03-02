@@ -1,10 +1,15 @@
-FROM denoland/deno:2.2.2 as build
+FROM docker.io/denoland/deno:2.2.2 as build
 
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y unzip
 
-COPY . .
+COPY importmap.json deno.json jsconfig.json .
+COPY scripts ./scripts
+COPY shared ./shared
+COPY renda ./renda
+COPY serverManager ./serverManager
+COPY gameServer ./gameServer
 
 RUN deno task build-gameserver --target linux
 
