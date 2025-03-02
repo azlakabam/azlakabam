@@ -46,6 +46,7 @@ const arenaWorkerHandlers = {
 		let count = 0;
 		for (let x = rect.min.x; x < rect.max.x; x++) {
 			for (let y = rect.min.y; y < rect.max.y; y++) {
+				if(x < 0 || y < 0 || x >= arenaWidth || y >= arenaHeight) continue;
 				if (arenaTiles[x][y] !== -1) {
 					arenaTiles[x][y] = playerId;
 					count += 1;
