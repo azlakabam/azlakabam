@@ -10,6 +10,7 @@ COPY shared ./shared
 COPY renda ./renda
 COPY serverManager ./serverManager
 COPY gameServer ./gameServer
+COPY map.yaml ./map.yaml
 
 RUN deno task build-gameserver --target linux
 
@@ -19,4 +20,4 @@ COPY --from=build /app/gameServer/out/linux/ .
 
 EXPOSE 8080
 
-ENTRYPOINT ["./splixGameServer", "--hostname", "0.0.0.0"]
+ENTRYPOINT ["./splixGameServer", "--hostname", "0.0.0.0", "--map", "./map.yaml"]
