@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_ROOT=$(pwd)
+PROJECT_ROOT="$(pwd)"
 IMAGE_PREFIX="splix-"
 
 function branch_exists () {
@@ -12,7 +12,7 @@ function current_branch () {
 }
 
 function read_server_file() {
-    cat $PROJECT_ROOT/server.port
+    cat "$PROJECT_ROOT"/server.port
 }
 
 ###
@@ -20,37 +20,42 @@ function read_server_file() {
 ###
 
 function pull () {
+    WORKING_BRANCH="$(current_branch)"
     for remote in `git branch --remote --list --format '%(refname:short)' -i`;
     do
-        if [[ $remote != origin* ]] || [[ $remote == 'origin/HEAD' ]] || branch_exists ${remote/origin\//""}; then
+        if [[ "$remote" != origin* ]] || [[ "$remote" == 'origin/HEAD' ]]; then
             continue
         fi
-        git branch --track ${remote/origin\//""} $remote
+        BRANCH="${remote/origin\//""}"
+        if ! branch_exists "$BRANCH"; then
+            git branch --track "${remote/origin\//""}" "$remote"
+        fi
+        git switch "$BRANCH"
+        git pull
     done;
-    git fetch --all
-    git pull --all
+    git switch "$WORKING_BRANCH"
 }
 
 function build-branch () {
     BRANCH="$1"
     IMAGE_NAME="$IMAGE_PREFIX$1"
-    WORKING_BRANCH=$(current_branch)
+    WORKING_BRANCH="$(current_branch)"
     branch_exists "$BRANCH"  || (echo Branch "$BRANCH" does not exist. Did you pull ?; exit 1) || exit 1
     git switch "$BRANCH" || exit 1
-    podman build -f Dockerfile -t $IMAGE_NAME
+    podman build -f Dockerfile -t "$IMAGE_NAME"
     git switch "$WORKING_BRANCH"
 }
 
 function run-branch () {
     BRANCH="$1"
     IMAGE_NAME="$IMAGE_PREFIX$1"
-    WORKING_BRANCH=$(current_branch)
+    WORKING_BRANCH="$(current_branch)"
     branch_exists "$BRANCH"  || (echo Branch "$BRANCH" does not exist. Did you pull ?; exit 1) || exit 1
     podman image exists "$IMAGE_NAME"  || (echo Image "$IMAGE_NAME" does not exist. Did you build-branch?; exit 1) || exit 1
     git switch "$BRANCH" || exit 1
     PORT="$(read_server_file "$1")"
-    podman container exists "$IMAGE_NAME" && echo Stopping previous $IMAGE_NAME: && podman stop "$IMAGE_NAME" && podman rm "$IMAGE_NAME"
-    podman run --detach --publish "127.0.0.1:$PORT:8080" --name $IMAGE_NAME $IMAGE_NAME
+    podman container exists "$IMAGE_NAME" && echo Stopping previous "$IMAGE_NAME": && podman stop "$IMAGE_NAME" && podman rm "$IMAGE_NAME"
+    podman run --detach --publish "127.0.0.1:$PORT:8080" --name "$IMAGE_NAME" "$IMAGE_NAME"
     git switch "$WORKING_BRANCH"
 } 
 
