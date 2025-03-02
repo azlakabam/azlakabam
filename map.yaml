@@ -1,5 +1,5 @@
 # The size of the map (inlcuding the outer wall)
-Size: 22 # Takes precedence over Height and Width
+Size: 240 # Takes precedence over Height and Width
 # Available:
 # - default: the classical splix game
 # - drawing: players can only be killed by the wall
