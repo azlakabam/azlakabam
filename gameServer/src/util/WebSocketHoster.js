@@ -1,5 +1,3 @@
-import { announceAddrs } from "./announceAddrs.js";
-
 const INITIAL_ACCEPT_BACKOFF_DELAY = 5;
 
 let didRegisterUnhandledRejection = false;
@@ -60,8 +58,6 @@ export class WebSocketHoster {
 	 * @param {string} hostname
 	 */
 	startServer(port, hostname) {
-		const listener = Deno.listen({ port, hostname });
-		announceAddrs([{ protocol: "ws", addr: listener.addr }]);
 		registerUnhandledRejection();
 		Deno.serve({ port, hostname }, this.handleRequest);
 	}
