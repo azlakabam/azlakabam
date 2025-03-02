@@ -1,5 +1,5 @@
 # The size of the map (inlcuding the outer wall)
-Size: 41 # Takes precedence over Height and Width
+Size: 22 # Takes precedence over Height and Width
 # Available:
 # - default: the classical splix game
 # - drawing: players can only be killed by the wall
@@ -9,17 +9,17 @@ GameMode: default
 # The map is either cropped or extended to match the arena size.
 # x or X : spawn point
 # # : wall
-Map: |+1
- #########################################
- #       #       #       #       #       #
- #       #       #       #       #       #
- #   X   #   X   #   X   #   X   #   X   #
- #       #       #       #       #       #
- #       #       #       #       #       #
- #       #       #       #       #       #
- #       #       #       #       #       #
- #########################################
- #                                       #
- #                                       #
- #                  ...                  #
- #                                       #
+#Map: |+1
+# #########################################
+# #       #       #       #       #       #
+# #       #       #       #       #       #
+# #   X   #   X   #   X   #   X   #   X   #
+# #       #       #       #       #       #
+# #       #       #       #       #       #
+# #       #       #       #       #       #
+# #       #       #       #       #       #
+# #########################################
+# #                                       #
+# #                                       #
+# #                  ...                  #
+# #                                       #
