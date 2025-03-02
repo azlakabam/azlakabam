@@ -59,7 +59,7 @@ export class WebSocketHoster {
 	 */
 	startServer(port, hostname) {
 		registerUnhandledRejection();
-		Deno.serve({ port, hostname }, this.handleRequest);
+		Deno.serve({ port, hostname }, this.handleRequest.bind(this));
 	}
 
 	/**
