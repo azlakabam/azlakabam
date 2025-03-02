@@ -10,13 +10,13 @@ COPY shared ./shared
 COPY renda ./renda
 COPY serverManager ./serverManager
 COPY gameServer ./gameServer
-COPY map.yaml ./map.yaml
 
 RUN deno task build-gameserver --target linux
 
 FROM debian:12-slim
 
 COPY --from=build /app/gameServer/out/linux/ .
+COPY map.yaml ./map.yaml
 
 EXPOSE 8080
 
