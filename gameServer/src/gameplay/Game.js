@@ -179,7 +179,7 @@ export class Game {
 		}
 		return {
 			position,
-			direction: closestWall?.direction || "up",
+			direction: "paused" || closestWall?.direction || "up",
 		};
 	}
 

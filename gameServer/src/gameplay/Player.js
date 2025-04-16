@@ -1069,7 +1069,7 @@ export class Player {
 	}
 
 	getTotalScore() {
-		return this.#capturedTileCount + this.#killCount * 500;
+		return this.#capturedTileCount * 0  + this.#killCount * 1;
 	}
 
 	/**

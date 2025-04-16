@@ -24,7 +24,7 @@ export const UPDATES_VIEWPORT_RECT_SIZE = MIN_TILES_VIEWPORT_RECT_SIZE + VIEWPOR
 /**
  * How many tiles around the player should be filled when the player joins a game.
  */
-export const PLAYER_SPAWN_RADIUS = 2;
+export const PLAYER_SPAWN_RADIUS = 0;
 
 /**
  * How many tiles players move per millisecond. This should be the same value as on the client.
