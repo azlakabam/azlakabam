@@ -140,7 +140,7 @@ export class Game {
 	}
 
 	/**
-	 * @returns {{position: Vec2, direction: import("./Player.js").UnpausedDirection}}
+	 * @returns {{position: Vec2, direction: import("./Player.js").Direction}}
 	 */
 	getNewSpawnPosition() {
 		let position;
