@@ -140,7 +140,7 @@ export class Game {
 	}
 
 	/**
-	 * @returns {{position: Vec2, direction: import("./Player.js").Direction}}
+	 * @returns {{position: Vec2, direction: import("./Player.js").UnpausedDirection}}
 	 */
 	getNewSpawnPosition() {
 		let position;
@@ -179,7 +179,7 @@ export class Game {
 		}
 		return {
 			position,
-			direction: "paused" || closestWall?.direction || "up",
+			direction: closestWall?.direction || "up",
 		};
 	}
 
